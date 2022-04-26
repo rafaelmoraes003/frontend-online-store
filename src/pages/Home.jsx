@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class Home extends React.Component {
   constructor() {
@@ -19,6 +20,12 @@ class Home extends React.Component {
             value={ search }
             onChange={ (event) => this.setState({ search: event.target.value }) }
           />
+          <Link
+            to="/cart"
+            data-testid="shopping-cart-button"
+          >
+            <i className="fa-solid fa-cart-shopping" />
+          </Link>
         </div>
         <div className="result-area">
           <p data-testid="home-initial-message">

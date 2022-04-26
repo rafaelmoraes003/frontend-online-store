@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import Home from './pages/Home';
+import Cart from './pages/Cart';
 
 function App() {
   return (
@@ -10,6 +11,9 @@ function App() {
         <Switch>
           <Route exact path="/">
             <Home />
+          </Route>
+          <Route path="/cart">
+            <Cart />
           </Route>
         </Switch>
       </BrowserRouter>
