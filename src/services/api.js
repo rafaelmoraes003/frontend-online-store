@@ -3,7 +3,7 @@
 export async function getCategories() {
   const url = 'https://api.mercadolibre.com/sites/MLB/categories';
   try {
-    const response = await fetch(url);
+    const response = await fetch(url); // fetch test
     const data = await response.json();
     return data;
   } catch (error) {
