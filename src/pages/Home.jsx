@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { getCategories } from '../services/api';
+import { getCategories, getItemsByQuery } from '../services/api';
 
 class Home extends React.Component {
   constructor() {
@@ -9,6 +9,7 @@ class Home extends React.Component {
     this.state = {
       search: '',
       categories: [],
+      cards: [],
     };
   }
 
@@ -17,8 +18,14 @@ class Home extends React.Component {
     this.setState({ categories });
   }
 
+  fetchByQuery = async () => {
+    const { search } = this.state;
+    const items = await getItemsByQuery(search);
+    this.setState({ cards: items.results });
+  }
+
   render() {
-    const { search, categories } = this.state;
+    const { search, categories, cards } = this.state;
     return (
       <div className="container">
         <aside>
@@ -38,6 +45,7 @@ class Home extends React.Component {
           <input
             type="text"
             value={ search }
+            data-testid="query-input"
             onChange={ (event) => this.setState({ search: event.target.value }) }
           />
           <Link
@@ -46,10 +54,29 @@ class Home extends React.Component {
           >
             <i className="fa-solid fa-cart-shopping" />
           </Link>
+          <button
+            onClick={ this.fetchByQuery }
+            data-testid="query-button"
+            type="button"
+          >
+            Pesquisar
+          </button>
           <p data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
         </div>
+        {cards.length < 1 && <p>Nenhum produto foi encontrado</p>}
+        {cards.length > 1 && (
+          <div className="card">
+            {cards.map((card) => (
+              <div key={ card.id } data-testid="product">
+                <img src={ card.thumbnail } alt={ card.title } />
+                <h3>{ card.title }</h3>
+                <h4>{ card.price }</h4>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     );
   }
