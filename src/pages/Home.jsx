@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { getCategories } from '../services/api';
 
 class Home extends React.Component {
   constructor() {
@@ -7,13 +8,32 @@ class Home extends React.Component {
 
     this.state = {
       search: '',
+      categories: [],
     };
   }
 
+  async componentDidMount() {
+    const categories = await getCategories();
+    this.setState({ categories });
+  }
+
   render() {
-    const { search } = this.state;
+    const { search, categories } = this.state;
     return (
       <div className="container">
+        <aside>
+          <div className="categories">
+            { categories.map((item) => (
+              <button
+                type="button"
+                key={ item.id }
+                data-testid="category"
+              >
+                { item.name }
+              </button>
+            ))}
+          </div>
+        </aside>
         <div className="search-area">
           <input
             type="text"
@@ -26,8 +46,6 @@ class Home extends React.Component {
           >
             <i className="fa-solid fa-cart-shopping" />
           </Link>
-        </div>
-        <div className="result-area">
           <p data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
