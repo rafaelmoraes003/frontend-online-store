@@ -10,6 +10,7 @@ class Home extends React.Component {
       search: '',
       categories: [],
       cards: [],
+      loadSearch: false, // Estado adicionado para a mensagem de "produto não encontrado" aparecer somente após clicar no botão
     };
   }
 
@@ -21,11 +22,14 @@ class Home extends React.Component {
   fetchByQuery = async () => {
     const { search } = this.state;
     const items = await getItemsByQuery(search);
-    this.setState({ cards: items.results });
+    this.setState({
+      cards: items.results,
+      loadSearch: true, // Mudança do estado da mensagem de "produto não encontrado"
+    });
   }
 
   render() {
-    const { search, categories, cards } = this.state;
+    const { search, categories, cards, loadSearch } = this.state;
     return (
       <div className="container">
         <aside>
@@ -65,8 +69,8 @@ class Home extends React.Component {
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
         </div>
-        {cards.length < 1 && <p>Nenhum produto foi encontrado</p>}
-        {cards.length > 1 && (
+        {cards.length < 1 && loadSearch && <p>Nenhum produto foi encontrado</p>}
+        {cards.length >= 1 && (
           <div className="card">
             {cards.map((card) => (
               <div key={ card.id } data-testid="product">
