@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { getCategories, getItemsByQuery } from '../services/api';
+import { getCategories, getItemsByQuery, getItemsByCategory } from '../services/api';
 
 import './Home.style.css';
 
@@ -27,6 +27,14 @@ class Home extends React.Component {
     this.setState({
       cards: items.results,
       loadSearch: true, // Mudança do estado da mensagem de "produto não encontrado"
+    });
+  }
+
+  fetchByCategory = async ({ target }) => {
+    const { id } = target;
+    const items = await getItemsByCategory(id);
+    this.setState({
+      cards: items.results,
     });
   }
 
@@ -61,9 +69,11 @@ class Home extends React.Component {
               { categories.map((item) => (
                 <div className="categorie" key={ item.id }>
                   <button
+                    id={ item.id }
                     type="button"
                     key={ item.id }
                     data-testid="category"
+                    onClick={ this.fetchByCategory }
                   >
                     { item.name }
                   </button>
