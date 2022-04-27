@@ -34,7 +34,7 @@ export async function getItemsByQuery(query) {
 }
 
 export async function getItemsByCategory(CATEGORY_ID) {
-  const url = `https://api.mercadolibre.com/sites/MLB/search?category=${CATEGORY_ID}`;
+  const url = `https://api.mercadolibre.com/sites/MLB/search?category=${CATEGORY_ID}`; //
   try {
     const response = await fetch(url);
     const data = response.json();
