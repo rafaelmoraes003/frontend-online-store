@@ -76,8 +76,8 @@ class Home extends React.Component {
               <p data-testid="home-initial-message">
                 Digite algum termo de pesquisa ou escolha uma categoria.
               </p>
-              {cards.length < 1 && <p>Nenhum produto foi encontrado</p>}
-              {cards.length > 1 && (
+              {cards.length < 1 && loadSearch && <p>Nenhum produto foi encontrado</p>}
+              {cards.length >= 1 && (
                 <div className="cards">
                   {cards.map((card) => (
                     <div className="card" key={ card.id } data-testid="product">
@@ -94,18 +94,6 @@ class Home extends React.Component {
             </div>
           </section>
         </div>
-        {cards.length < 1 && loadSearch && <p>Nenhum produto foi encontrado</p>}
-        {cards.length >= 1 && (
-          <div className="card">
-            {cards.map((card) => (
-              <div key={ card.id } data-testid="product">
-                <img src={ card.thumbnail } alt={ card.title } />
-                <h3>{ card.title }</h3>
-                <h4>{ card.price }</h4>
-              </div>
-            ))}
-          </div>
-        )}
       </div>
     );
   }
