@@ -90,14 +90,20 @@ class Home extends React.Component {
               {cards.length >= 1 && (
                 <div className="cards">
                   {cards.map((card) => (
-                    <div className="card" key={ card.id } data-testid="product">
-                      <img src={ card.thumbnail } alt={ card.title } />
-                      <h3>{ card.title }</h3>
-                      <h4>
-                        R$
-                        { card.price }
-                      </h4>
-                    </div>
+                    <Link
+                      data-testid="product-detail-link"
+                      key={ card.id }
+                      to={ `/details/${card.id}` }
+                    >
+                      <div className="card" data-testid="product">
+                        <img src={ card.thumbnail } alt={ card.title } />
+                        <h3>{ card.title }</h3>
+                        <h4>
+                          R$
+                          { card.price }
+                        </h4>
+                      </div>
+                    </Link>
                   ))}
                 </div>
               )}
