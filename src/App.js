@@ -31,6 +31,38 @@ class App extends React.Component {
     });
   }
 
+  increaseQuantity = ({ target }) => {
+    const { id } = target;
+    const { cart } = this.state;
+
+    this.setState((prev) => ({
+      cart: cart.map((elem) => {
+        if (elem.id === id) {
+          return {...elem, quantity: elem.quantity + 1}
+        } return elem
+      })
+    }), () => {
+      const { cart } = this.state;
+      localStorage.setItem('cart', JSON.stringify(cart))
+    })
+  }
+
+  descreaseQuantity = ({ target }) => {
+    const { id } = target;
+    const { cart } = this.state;
+
+    this.setState((prev) => ({
+      cart: cart.map((elem) => {
+        if (elem.id === id) {
+          return {...elem, quantity: elem.quantity > 0 ? elem.quantity - 1 : 0}
+        } return elem
+      })
+    }), () => {
+      const { cart } = this.state;
+      localStorage.setItem('cart', JSON.stringify(cart))
+    })
+  }
+
   render() {
     const { cart } = this.state;
     return (
@@ -41,7 +73,7 @@ class App extends React.Component {
               <Home addToCart={ this.addToCart } />
             </Route>
             <Route path="/cart">
-              <Cart items={ cart } />
+              <Cart items={ cart } add={this.increaseQuantity} rem={this.descreaseQuantity} />
             </Route>
             <Route
               path="/details/:id"
