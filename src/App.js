@@ -16,15 +16,15 @@ class App extends React.Component {
 
   addToCart = async ({ target }) => {
     const { id } = target;
-    const product = await getDetailsById(id);
-    const newProduct = {
-      id: product.id,
-      title: product.title,
-      price: product.price,
-      thumbnail: product.thumbnail,
+    const details = await getDetailsById(id);
+    const product = {
+      id: details.id,
+      title: details.title,
+      price: details.price,
+      thumbnail: details.thumbnail,
       quantity: 1 };
     this.setState((prev) => ({
-      cart: [...prev.cart, newProduct],
+      cart: [...prev.cart, product],
     }), () => {
       const { cart } = this.state;
       localStorage.setItem('cart', JSON.stringify(cart));
@@ -45,7 +45,9 @@ class App extends React.Component {
             </Route>
             <Route
               path="/details/:id"
-              render={ (props) => <ProductDetails { ...props } /> }
+              render={ (props) => (
+                <ProductDetails addToCart={ this.addToCart } { ...props } />
+              ) }
             />
           </Switch>
         </BrowserRouter>
