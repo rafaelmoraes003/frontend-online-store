@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { getCategories, getItemsByQuery, getItemsByCategory } from '../services/api';
-
+import PropTypes from 'prop-types';
+import { getCategories,
+  getItemsByQuery, getItemsByCategory } from '../services/api';
 import './Home.style.css';
 
 class Home extends React.Component {
@@ -38,7 +39,25 @@ class Home extends React.Component {
     });
   }
 
+  // addToCart = async ({ target }) => {
+  //   const { id } = target;
+  //   const product = await getDetailsById(id);
+  //   const newProduct = {
+  //     id: product.id,
+  //     title: product.title,
+  //     price: product.price,
+  //     thumbnail: product.thumbnail,
+  //     quantity: 1 };
+  //   this.setState((prev) => ({
+  //     cart: [...prev.cart, newProduct],
+  //   }), () => {
+  //     const { cart } = this.state;
+  //     localStorage.setItem('cart', JSON.stringify(cart));
+  //   });
+  // }
+
   render() {
+    const { addToCart } = this.props;
     const { search, categories, cards, loadSearch } = this.state;
     return (
       <div className="container">
@@ -89,21 +108,31 @@ class Home extends React.Component {
               {cards.length < 1 && loadSearch && <p>Nenhum produto foi encontrado</p>}
               {cards.length >= 1 && (
                 <div className="cards">
-                  {cards.map((card) => (
-                    <Link
-                      data-testid="product-detail-link"
-                      key={ card.id }
-                      to={ `/details/${card.id}` }
-                    >
-                      <div className="card" data-testid="product">
-                        <img src={ card.thumbnail } alt={ card.title } />
-                        <h3>{ card.title }</h3>
-                        <h4>
-                          R$
-                          { card.price }
-                        </h4>
-                      </div>
-                    </Link>
+                  {cards.map((card, index) => (
+                    <div key={ index }>
+                      <Link
+                        data-testid="product-detail-link"
+                        key={ card.id }
+                        to={ `/details/${card.id}` }
+                      >
+                        <div className="card" data-testid="product">
+                          <img src={ card.thumbnail } alt={ card.title } />
+                          <h3>{ card.title }</h3>
+                          <h4>
+                            R$
+                            { card.price }
+                          </h4>
+                        </div>
+                      </Link>
+                      <button
+                        id={ card.id }
+                        type="button"
+                        onClick={ addToCart }
+                        data-testid="product-add-to-cart"
+                      >
+                        ➕
+                      </button>
+                    </div>
                   ))}
                 </div>
               )}
@@ -116,3 +145,7 @@ class Home extends React.Component {
 }
 
 export default Home;
+
+Home.propTypes = {
+  addToCart: PropTypes.func.isRequired,
+};
