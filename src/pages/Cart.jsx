@@ -24,5 +24,5 @@ class Cart extends React.Component {
 export default Cart;
 
 Cart.propTypes = {
-  items: PropTypes.arrayOf.isRequired,
+  items: PropTypes.func.isRequired,
 };
