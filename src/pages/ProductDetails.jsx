@@ -19,7 +19,6 @@ class ProductDetails extends Component {
     const { params } = match;
     const { id } = params;
     const data = await getDetailsById(id);
-    console.log(data);
 
     this.setState({
       product: data,
