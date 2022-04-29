@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { toHaveStyle } from '@testing-library/jest-dom/dist/matchers';
 
 class Cart extends React.Component {
   render() {

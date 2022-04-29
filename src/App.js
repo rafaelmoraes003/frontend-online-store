@@ -34,32 +34,30 @@ class App extends React.Component {
   increaseQuantity = ({ target }) => {
     const { id } = target;
     const { cart } = this.state;
-
-    this.setState((prev) => ({
-      cart: cart.map((elem) => {
-        if (elem.id === id) {
-          return {...elem, quantity: elem.quantity + 1}
-        } return elem
+    this.setState({
+      cart: cart.map((item) => {
+        if (item.id === id) {
+          return {...item, quantity: item.quantity + 1}
+        } return item
+      }, () => {
+        const { cart } = this.state;
+        localStorage.setItem('cart', JSON.stringify(cart))
       })
-    }), () => {
-      const { cart } = this.state;
-      localStorage.setItem('cart', JSON.stringify(cart))
     })
   }
 
   descreaseQuantity = ({ target }) => {
     const { id } = target;
     const { cart } = this.state;
-
-    this.setState((prev) => ({
+    this.setState({
       cart: cart.map((elem) => {
         if (elem.id === id) {
           return {...elem, quantity: elem.quantity > 0 ? elem.quantity - 1 : 0}
         } return elem
+      }, () => {
+        const { cart } = this.state;
+        localStorage.setItem('cart', JSON.stringify(cart))
       })
-    }), () => {
-      const { cart } = this.state;
-      localStorage.setItem('cart', JSON.stringify(cart))
     })
   }
 
