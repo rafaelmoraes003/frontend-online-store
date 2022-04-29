@@ -2,12 +2,17 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { getDetailsById } from '../services/api';
+import EvaluationForm from './components/EvaluationForm';
 
 class ProductDetails extends Component {
   constructor() {
     super();
     this.state = {
       product: [],
+      currentLocal: JSON.parse(localStorage.getItem('evaluations')) || [],
+      email: '',
+      evaluation: 0,
+      comment: '',
     };
   }
 
@@ -26,8 +31,28 @@ class ProductDetails extends Component {
     });
   }
 
+  handleChange = ({ target }) => {
+    const { id, value } = target;
+    this.setState({ [id]: value });
+  }
+
+  addLocalStorage = () => {
+    const { email, evaluation, comment } = this.state;
+    const evalObj = { email, evaluation, comment };
+    // const currentLocal = JSON.parse(localStorage.getItem('evaluations')) || [];
+    this.setState((prev) => ({
+      currentLocal: [...prev.currentLocal, evalObj],
+      email: '',
+      evaluation: 0,
+      comment: '',
+    }), () => {
+      const { currentLocal } = this.state;
+      localStorage.setItem('evaluations', JSON.stringify(currentLocal));
+    });
+  }
+
   render() {
-    const { product } = this.state;
+    const { product, currentLocal, email, comment, evaluation } = this.state;
     const { addToCart } = this.props;
 
     return (
@@ -48,6 +73,15 @@ class ProductDetails extends Component {
         >
           ➕
         </button>
+
+        <EvaluationForm
+          currentLocal={ currentLocal }
+          addLocalStorage={ this.addLocalStorage }
+          handleChange={ this.handleChange }
+          email={ email }
+          comment={ comment }
+          evaluation={ evaluation }
+        />
       </>
     );
   }
