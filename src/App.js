@@ -4,44 +4,95 @@ import Cart from './pages/Cart';
 import Home from './pages/Home';
 import ProductDetails from './pages/ProductDetails';
 
-import { getDetailsById } from './services/api';
-
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      cart: JSON.parse(localStorage.getItem('cart')) || [],
+      list: [],
+      result: JSON.parse(localStorage.getItem('cart')) || [],
     };
   }
 
-  addToCart = async ({ target }) => {
+  addToCart = ({ target }) => {
     const { id } = target;
-    const details = await getDetailsById(id);
-    const product = {
-      id: details.id,
-      title: details.title,
-      price: details.price,
-      thumbnail: details.thumbnail,
-      quantity: 1 };
+    const { list } = this.state;
+    const product = list.find((elemento) => elemento.id === id);
+    product.quantity = 1;
     this.setState((prev) => ({
-      cart: [...prev.cart, product],
+      result: [...prev.result, product],
     }), () => {
-      const { cart } = this.state;
-      localStorage.setItem('cart', JSON.stringify(cart));
+      const { result } = this.state;
+      localStorage.setItem('cart', JSON.stringify(result));
+    });
+  }
+
+  fixTest = (id) => {
+    this.setState({
+      list: id,
+    });
+  }
+
+  updateLocalStorage = (obj) => {
+    localStorage.setItem('cart', JSON.stringify(obj));
+  }
+
+  increaseQuantity = ({ target }) => {
+    const { result } = this.state;
+    const increase = result.find((elemento) => elemento.id === target.id);
+    increase.quantity += 1;
+
+    this.setState((prev) => ({
+      result: prev.result,
+    }), () => {
+      this.updateLocalStorage(result);
+    });
+  }
+
+  descreaseQuantity = ({ target }) => {
+    const { result } = this.state;
+    const decrease = result.find((elemento) => elemento.id === target.id);
+    if (decrease.quantity <= 0) {
+      decrease.quantity = 0;
+    } else {
+      decrease.quantity -= 1;
+    }
+
+    this.setState((prev) => ({
+      result: prev.result,
+    }), () => {
+      this.updateLocalStorage(result);
+    });
+  }
+
+  removeItem = ({ target }) => {
+    const { result } = this.state;
+    const remove = result.filter((elemento) => elemento.id !== target.id);
+    this.setState({
+      result: remove,
+    }, () => {
+      this.updateLocalStorage(remove);
     });
   }
 
   render() {
-    const { cart } = this.state;
+    const { result } = this.state;
     return (
       <div className="App">
         <BrowserRouter>
           <Switch>
             <Route exact path="/">
-              <Home addToCart={ this.addToCart } />
+              <Home
+                addToCart={ this.addToCart }
+                test={ this.fixTest }
+              />
             </Route>
             <Route path="/cart">
-              <Cart items={ cart } />
+              <Cart
+                items={ result }
+                increase={ this.increaseQuantity }
+                decrease={ this.descreaseQuantity }
+                remove={ this.removeItem }
+              />
             </Route>
             <Route
               path="/details/:id"
