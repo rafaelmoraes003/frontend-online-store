@@ -9,7 +9,7 @@ class App extends React.Component {
     super();
     this.state = {
       list: [],
-      result: JSON.parse(localStorage.getItem('cart')) || [],
+      result: JSON.parse(localStorage.getItem('cart')) || [], //
     };
   }
 
