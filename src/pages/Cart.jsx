@@ -3,38 +3,45 @@ import PropTypes from 'prop-types';
 
 class Cart extends React.Component {
   render() {
-    const { items, add, rem } = this.props;
+    const { items, increase, decrease, remove } = this.props;
     return (
       <div>
         { items.length === 0 ? (
           <h3 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h3>
         ) : items.map((item) => (
-          <div key={ item.title }>
+          <div key={ item.id }>
 
             <p data-testid="shopping-cart-product-name">{ item.title }</p>
-            <button><i className="fa-solid fa-xmark"></i></button>
+
+            <button
+              id={ item.id }
+              type="button"
+              onClick={ remove }
+            >
+              <i id={ item.id } className="fa-solid fa-x" />
+            </button>
             <button
               data-testid="product-increase-quantity"
+              type="button"
               id={ item.id }
-              onClick={add}
+              onClick={ increase }
             >
-              +
+              <i id={ item.id } className="fa-solid fa-plus" />
             </button>
 
-            <span data-testid="shopping-cart-product-quantity">
-            { item.quantity }
-            </span>
+            <span data-testid="shopping-cart-product-quantity">{ item.quantity }</span>
 
-            <button 
+            <button
               data-testid="product-decrease-quantity"
+              type="button"
               id={ item.id }
-              onClick={rem}
+              onClick={ decrease }
             >
-              -
+              <i id={ item.id } className="fa-solid fa-minus" />
             </button>
           </div>
         ))}
-        <button>Finalizar compra</button>
+        <button type="button">Finalizar compra</button>
       </div>
     );
   }
@@ -43,5 +50,8 @@ class Cart extends React.Component {
 export default Cart;
 
 Cart.propTypes = {
-  items: PropTypes.func.isRequired,
+  items: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  increase: PropTypes.func.isRequired,
+  decrease: PropTypes.func.isRequired,
+  remove: PropTypes.func.isRequired,
 };

@@ -24,7 +24,9 @@ class Home extends React.Component {
 
   fetchByQuery = async () => {
     const { search } = this.state;
+    const { test } = this.props;
     const items = await getItemsByQuery(search);
+    test(items.results);
     this.setState({
       cards: items.results,
       loadSearch: true, // Mudança do estado da mensagem de "produto não encontrado"
@@ -33,28 +35,13 @@ class Home extends React.Component {
 
   fetchByCategory = async ({ target }) => {
     const { id } = target;
+    const { test } = this.props;
     const items = await getItemsByCategory(id);
+    test(items.results);
     this.setState({
       cards: items.results,
     });
   }
-
-  // addToCart = async ({ target }) => {
-  //   const { id } = target;
-  //   const product = await getDetailsById(id);
-  //   const newProduct = {
-  //     id: product.id,
-  //     title: product.title,
-  //     price: product.price,
-  //     thumbnail: product.thumbnail,
-  //     quantity: 1 };
-  //   this.setState((prev) => ({
-  //     cart: [...prev.cart, newProduct],
-  //   }), () => {
-  //     const { cart } = this.state;
-  //     localStorage.setItem('cart', JSON.stringify(cart));
-  //   });
-  // }
 
   render() {
     const { addToCart } = this.props;
@@ -130,7 +117,7 @@ class Home extends React.Component {
                         onClick={ addToCart }
                         data-testid="product-add-to-cart"
                       >
-                        ➕
+                        Adicionar ao carrinho
                       </button>
                     </div>
                   ))}
@@ -148,4 +135,5 @@ export default Home;
 
 Home.propTypes = {
   addToCart: PropTypes.func.isRequired,
+  test: PropTypes.func.isRequired,
 };
