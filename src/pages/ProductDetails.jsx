@@ -59,7 +59,7 @@ class ProductDetails extends Component {
         <Link to="/cart" data-testid="shopping-cart-button">
           <i className="fa-solid fa-cart-shopping" />
           <span data-testid="shopping-cart-size">
-            { items.length }
+            {items.length}
           </span>
         </Link>
 
