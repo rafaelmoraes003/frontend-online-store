@@ -99,7 +99,11 @@ class App extends React.Component {
             <Route
               path="/details/:id"
               render={ (props) => (
-                <ProductDetails addToCart={ this.addToCart } { ...props } />
+                <ProductDetails
+                  addToCart={ this.addToCart }
+                  { ...props }
+                  items={ result }
+                />
               ) }
             />
             <Route
