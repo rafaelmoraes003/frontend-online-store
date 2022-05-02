@@ -21,14 +21,29 @@ class Cart extends React.Component {
             >
               <i id={ item.id } className="fa-solid fa-x" />
             </button>
-            <button
-              data-testid="product-increase-quantity"
-              type="button"
-              id={ item.id }
-              onClick={ increase }
-            >
-              <i id={ item.id } className="fa-solid fa-plus" />
-            </button>
+
+            {item.quantity < item.available_quantity
+              ? (
+                <button
+                  data-testid="product-increase-quantity"
+                  type="button"
+                  id={ item.id }
+                  onClick={ increase }
+                >
+                  +
+                </button>
+              )
+              : (
+                <button
+                  data-testid="product-increase-quantity"
+                  type="button"
+                  id={ item.id }
+                  onClick={ increase }
+                  disabled
+                >
+                  +
+                </button>
+              )}
 
             <span data-testid="shopping-cart-product-quantity">{ item.quantity }</span>
 
