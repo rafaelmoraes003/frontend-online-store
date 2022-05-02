@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { getDetailsById } from '../services/api';
-import EvaluationForm from './components/EvaluationForm';
+import EvaluationForm from '../components/EvaluationForm';
 
 class ProductDetails extends Component {
   constructor() {
@@ -53,16 +53,11 @@ class ProductDetails extends Component {
 
   render() {
     const { product, currentLocal, email, comment, evaluation } = this.state;
-    const { addToCart, items } = this.props;
-
+    const { addToCart } = this.props;
     return (
       <>
-        <Link to="/cart" data-testid="shopping-cart-button">
-          <i className="fa-solid fa-cart-shopping" />
-          <span data-testid="shopping-cart-size">
-            { items.length }
-          </span>
-        </Link>
+        <Link to="/cart" data-testid="shopping-cart-button">Carrinho</Link>
+
         <h1>Detalhes do produto</h1>
         <h3 data-testid="product-detail-name">{ product.title }</h3>
         <img
@@ -99,7 +94,6 @@ ProductDetails.propTypes = {
     }),
   }).isRequired,
   addToCart: PropTypes.func.isRequired,
-  items: PropTypes.arrayOf.isRequired,
 };
 
 export default ProductDetails;

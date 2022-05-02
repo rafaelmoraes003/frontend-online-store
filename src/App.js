@@ -3,6 +3,7 @@ import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import Cart from './pages/Cart';
 import Home from './pages/Home';
 import ProductDetails from './pages/ProductDetails';
+import Checkout from './pages/Checkout';
 
 class App extends React.Component {
   constructor() {
@@ -98,11 +99,13 @@ class App extends React.Component {
             <Route
               path="/details/:id"
               render={ (props) => (
-                <ProductDetails
-                  items={ result }
-                  addToCart={ this.addToCart }
-                  { ...props }
-                />
+                <ProductDetails addToCart={ this.addToCart } { ...props } />
+              ) }
+            />
+            <Route
+              path="/checkout"
+              render={ (props) => (
+                <Checkout totalProducts={ result } { ...props } />
               ) }
             />
           </Switch>
