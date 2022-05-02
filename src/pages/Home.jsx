@@ -44,7 +44,7 @@ class Home extends React.Component {
   }
 
   render() {
-    const { addToCart } = this.props;
+    const { addToCart, items } = this.props;
     const { search, categories, cards, loadSearch } = this.state;
     return (
       <div className="container">
