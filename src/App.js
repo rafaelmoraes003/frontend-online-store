@@ -84,6 +84,7 @@ class App extends React.Component {
               <Home
                 addToCart={ this.addToCart }
                 test={ this.fixTest }
+                items={ result }
               />
             </Route>
             <Route path="/cart">
@@ -97,7 +98,11 @@ class App extends React.Component {
             <Route
               path="/details/:id"
               render={ (props) => (
-                <ProductDetails addToCart={ this.addToCart } { ...props } />
+                <ProductDetails
+                  items={ result }
+                  addToCart={ this.addToCart }
+                  { ...props }
+                />
               ) }
             />
           </Switch>
