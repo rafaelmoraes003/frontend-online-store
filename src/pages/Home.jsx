@@ -136,6 +136,7 @@ class Home extends React.Component {
 
 Home.propTypes = {
   addToCart: PropTypes.func.isRequired,
+  items: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   test: PropTypes.func.isRequired,
 };
 
