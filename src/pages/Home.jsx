@@ -44,7 +44,7 @@ class Home extends React.Component {
   }
 
   render() {
-    const { addToCart } = this.props;
+    const { addToCart, items } = this.props;
     const { search, categories, cards, loadSearch } = this.state;
     return (
       <div className="container">
@@ -67,6 +67,9 @@ class Home extends React.Component {
             data-testid="shopping-cart-button"
           >
             <i className="fa-solid fa-cart-shopping" />
+            <span data-testid="shopping-cart-size">
+              { items.length }
+            </span>
           </Link>
         </div>
         <div className="content-area">
@@ -136,4 +139,5 @@ export default Home;
 Home.propTypes = {
   addToCart: PropTypes.func.isRequired,
   test: PropTypes.func.isRequired,
+  items: PropTypes.arrayOf.isRequired,
 };
