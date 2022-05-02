@@ -1,0 +1,82 @@
+.container {
+  padding: 20px;
+  width: 100%;
+}
+
+.search-area {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.search-area input {
+  border: 1px solid lightgray;
+  margin-right: 20px;
+  padding: 7px;
+  width: 70%;
+}
+
+aside button {
+  background-color: lightblue;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  padding: 5px 10px;
+  width: 80%;
+}
+
+.search-area button {
+  background-color: lightblue;
+  border: none;
+  border-radius: 5px;
+  margin-right: 20px;
+  padding: 10px 15px;
+}
+
+.search-area i {
+  font-size: 30px;
+}
+
+
+.content-area {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  width: 100%;
+}
+
+aside {
+  width: 25%;
+}
+
+section {
+  width: 100%;
+}
+
+.cards-area {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.cards-area .cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  text-align: center;
+  width: 100%;
+}
+
+.cards-area .card {
+  margin: 20px 0;
+  overflow: hidden;
+  width: 230px;
+}
+
+.cards-area h3 {
+  font-size: 15px;
+}
+
+.cards-area h4 {
+  color: red;
+  margin-top: 5px;
+}
