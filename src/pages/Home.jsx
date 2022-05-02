@@ -33,7 +33,7 @@ class Home extends React.Component {
     });
   }
 
-  fetchByCategory = async ({ target }) => {
+  fetchByCategory = async ({ target }) => { //
     const { id } = target;
     const { test } = this.props;
     const items = await getItemsByCategory(id);
