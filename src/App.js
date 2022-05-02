@@ -46,9 +46,13 @@ class App extends React.Component {
     }), () => {
       this.updateLocalStorage(result);
     });
+    // const buttonIncrease = document.getElementById(target.id);
+    // buttonIncrease.disabled = true;
+    // console.log(buttonIncrease);
   }
 
-  descreaseQuantity = ({ target }) => {
+  descreaseQuantity = (event) => {
+    const { target } = event;
     const { result } = this.state;
     const decrease = result.find((elemento) => elemento.id === target.id);
     if (decrease.quantity <= 0) {
@@ -56,7 +60,6 @@ class App extends React.Component {
     } else {
       decrease.quantity -= 1;
     }
-
     this.setState((prev) => ({
       result: prev.result,
     }), () => {
