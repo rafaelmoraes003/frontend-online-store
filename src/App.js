@@ -85,6 +85,7 @@ class App extends React.Component {
               <Home
                 addToCart={ this.addToCart }
                 test={ this.fixTest }
+                items={ result }
               />
             </Route>
             <Route path="/cart">

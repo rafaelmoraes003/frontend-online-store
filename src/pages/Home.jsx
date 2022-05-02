@@ -67,6 +67,9 @@ class Home extends React.Component {
             data-testid="shopping-cart-button"
           >
             <i className="fa-solid fa-cart-shopping" />
+            <span data-testid="shopping-cart-size">
+              { items.length }
+            </span>
           </Link>
         </div>
         <div className="content-area">
@@ -137,3 +140,4 @@ Home.propTypes = {
 };
 
 export default Home;
+

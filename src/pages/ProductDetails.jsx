@@ -54,10 +54,10 @@ class ProductDetails extends Component {
   render() {
     const { product, currentLocal, email, comment, evaluation } = this.state;
     const { addToCart } = this.props;
-
     return (
       <>
         <Link to="/cart" data-testid="shopping-cart-button">Carrinho</Link>
+
         <h1>Detalhes do produto</h1>
         <h3 data-testid="product-detail-name">{ product.title }</h3>
         <img
