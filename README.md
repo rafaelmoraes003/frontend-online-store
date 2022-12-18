@@ -1,26 +1,26 @@
-<h1 align="left">Projeto Frontend Online Store</h1>
+<h1 align="left">Frontend Online Store</h1>
 
 ###
 
-<p align="left">Neste projeto, o objetivo era construir uma loja online que consumisse a API do Mercado Livre, sendo possível filtrar os produtos por categoria, ver detalhes dos produtos, adicionar itens ao carrinho (sendo possível alterar suas quantidades), removê-los e simular finalização da compra.</p>
+<p align="left">In this project, the objective was to build an online store that consumed the Mercado Livre API, being possible to filter the products by category, see product details, add items to the cart (being able to change their quantities), remove them and simulate checkout. purchase.</p>
 
 ###
 
-<h2 align="left">Tecnologias utilizadas</h2>
+<h2 align="left">Technologies used</h2>
 
 ###
 
 <div align="left">
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" height="70" width="52" alt="javascript logo"  />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" height="70" width="52" alt="react logo"  />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" height="50" width="62" alt="javascript logo"  />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" height="50" width="62" alt="react logo"  />
 </div>
 
 ###
 
-<h2 align="left">Como utilizar a aplicação</h2>
+<h2 align="left">How to use the application</h2>
 
 ###
 
-Faça o clone da aplicação usando o comando `git clone`. Após isso, entre na pasta do projeto utilizando o comando `cd frontend-online-store` e rode o comando `npm install`. Após a instalação, utilize o comando `npm start`.
+Clone the application using the `git clone` command. After that, enter the project folder using the command `cd frontend-online-store` and run the command `npm install`. After installation, use the `npm start` command.
 
 ###
